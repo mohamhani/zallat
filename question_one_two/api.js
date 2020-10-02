@@ -1,14 +1,12 @@
 const axios = require('axios');
 const stateList = require('./states');
 
-const API_KEY = 'f8c39d1a3ce44b9772f00aa5ad65de14';
-
 const getStateTwoDigitCode = (stateFullName) => {
     return stateList[stateFullName];
 }
 
 const getState = async (stateTwoDigitCode) => {
-    const state = await axios.get(`http://api.eia.gov/series/?api_key=${API_KEY}&series_id=EMISS.CO2-TOTV-EC-CO-${stateTwoDigitCode}.A`);
+    const state = await axios.get(`http://api.eia.gov/series/?api_key=${process.env.API_KEY}&series_id=EMISS.CO2-TOTV-EC-CO-${stateTwoDigitCode}.A`);
 
     const stateData = state.data.series[0].data;
 
